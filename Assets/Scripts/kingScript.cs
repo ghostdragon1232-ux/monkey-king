@@ -30,12 +30,14 @@ public class kingScript : MonoBehaviour
         NavMeshHit hit;
         if (NavMesh.SamplePosition(target, out hit, 2f, NavMesh.AllAreas))
         {
+            print("run");
             agent.SetDestination(hit.position);
         }
     }
     public void kingBit(int damage)
     {
         health -= damage;
+        GameManager.instance.UpdateKingHealth( damage);
         speed += 10f;
         agent.speed = speed;
         print("King has" + health);

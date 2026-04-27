@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    private InputAction moveAction;
+    private InputAction moveAction,attackInput;
     private Rigidbody rb;
     private Vector2 moveVector;
     private Vector3 startPos;
@@ -12,11 +12,13 @@ public class PlayerMove : MonoBehaviour
     public float previousAttack = -10f;
     public float attackradius = 1.5f;
     public float attackrange = 1f;
+    public bool useForce = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        attackInput = InputSystem.actions.FindAction("Attack");
         rb = GetComponent<Rigidbody>();
         startPos = transform.position;
     }
@@ -25,10 +27,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         moveVector = moveAction.ReadValue<Vector2>();
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        print(moveVector);
+
+        if (attackInput.WasReleasedThisFrame())
         {
             monkeyAttack();
         }
+
+        
+
     }
 
     void FixedUpdate()
@@ -36,10 +43,26 @@ public class PlayerMove : MonoBehaviour
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
 
-        // rb.AddForce((moveVector.y * new Vector3(cameraForward.x, 0, cameraForward.z)) * speed);
-        rb.AddForce((moveVector.y * cameraForward) * speed);
-        rb.AddForce((moveVector.x * cameraRight) * speed);
-        //rb.linearVelocity += new Vector3(moveVector.x * speed, 0, moveVector.y * speed);
+        if (useForce)
+        {
+            rb.AddForce((moveVector.y * cameraForward) * speed);
+            rb.AddForce((moveVector.x * cameraRight) * speed);
+        }
+        else
+        {
+            if (moveVector.x == 0 && moveVector.y == 0)
+            {
+                rb.linearVelocity = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                Vector3 moveR = moveVector.x * cameraRight;
+                Vector3 moveF = moveVector.y * cameraForward;
+                rb.linearVelocity = (moveR + moveF) * speed;
+            }
+        }
+                transform.rotation = Camera.main.transform.rotation;
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -56,6 +79,7 @@ public class PlayerMove : MonoBehaviour
     }
     void monkeyAttack()
     {
+        print("monkey attack!");
       if  (Time.time - previousAttack < attackcd)
         return;
         Vector3 bitespawn = transform.position + transform.forward * attackrange;
