@@ -25,6 +25,7 @@ public class PlayerMove : MonoBehaviour
         attackInput = InputSystem.actions.FindAction("Attack");
         rb = GetComponent<Rigidbody>();
         startPos = transform.position;
+        Soundmanager.playSound(soundtype.monkeywalk);
     }
 
     // Update is called once per frame
@@ -32,7 +33,6 @@ public class PlayerMove : MonoBehaviour
     {
         moveVector = moveAction.ReadValue<Vector2>();
         print(moveVector);
-        Soundmanager.playSound(soundtype.monkeywalk);
         cooldown();
 
         if (attackInput.WasReleasedThisFrame())

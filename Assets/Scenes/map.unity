@@ -42557,7 +42557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Soundmanager
   soundList:
-  - {fileID: 8300000, guid: 48806887112d6434d859f11671dcff0b, type: 3}
+  - {fileID: 8300000, guid: acd31c31fbd361d4f84d4052fc301a45, type: 3}
   - {fileID: 8300000, guid: 7ddcedf51bc7f924bbba361e935fae4f, type: 3}
   - {fileID: 8300000, guid: 967023151c34a434e994d78d821195fa, type: 3}
   - {fileID: 8300000, guid: 64381e17726c77c43a48e6f99918adef, type: 3}
