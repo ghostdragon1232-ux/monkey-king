@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     public void collectbook()
     {
         bookcollected++;
+        Soundmanager.playSound(soundtype.bookpickup);
         bookui();
     }
     void bookui()
@@ -40,11 +41,11 @@ public class GameManager : MonoBehaviour
     {
         if(bookcollected >= booksneeded)
         {
-            SceneManager.LoadScene("MonkeyEnding");
+            SceneManager.LoadScene("MONKEY KING");
         }
         else
         {
-            SceneManager.LoadScene("DeadKing");
+            SceneManager.LoadScene("FALSE ENDING");
         }
     }
  }

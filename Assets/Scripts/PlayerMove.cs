@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
     public float attackrange = 1f;
     public bool useForce = false;
     public TextMeshProUGUI attackready;
+    private bool hitoccured;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,13 +32,13 @@ public class PlayerMove : MonoBehaviour
     {
         moveVector = moveAction.ReadValue<Vector2>();
         print(moveVector);
+        Soundmanager.playSound(soundtype.monkeywalk);
         cooldown();
 
         if (attackInput.WasReleasedThisFrame())
         {
             monkeyAttack();
         }
-
         
 
     }
@@ -88,8 +89,9 @@ public class PlayerMove : MonoBehaviour
     }
     void monkeyAttack()
     {
+        hitoccured = false;
       if  (Time.time - previousAttack < attackcd)
-        return;
+        return ;
         Vector3 bitespawn = transform.position + transform.forward * attackrange;
         Collider[] hits = Physics.OverlapSphere(bitespawn,attackradius);
         foreach (Collider hit in hits)
@@ -105,11 +107,17 @@ public class PlayerMove : MonoBehaviour
                     {
                         king.kingBit(1);
                         previousAttack = Time.time;
+                        hitoccured = true;
+                        print("hit");
                         break;
                     }
                 }
             }
-        }
+        }            
+            if (hitoccured)
+            {
+                Soundmanager.playSound(soundtype.bite);
+            }
     }
     void cooldown()
     {

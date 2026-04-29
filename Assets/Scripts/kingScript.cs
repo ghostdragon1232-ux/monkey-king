@@ -46,6 +46,7 @@ public class kingScript : MonoBehaviour
            int randomLocation = Random.Range(0,kingRunPoints.Length);
             runningAway=true;
             agent.SetDestination(kingRunPoints[randomLocation].position);
+            Soundmanager.playSound(soundtype.kingwalk);
         }
         else if (agent.remainingDistance < 0.5f)
         {
