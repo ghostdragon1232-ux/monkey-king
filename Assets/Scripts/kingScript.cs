@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class kingScript : MonoBehaviour
 {
@@ -10,18 +11,27 @@ public class kingScript : MonoBehaviour
     private NavMeshAgent agent;
     public Transform [] kingRunPoints;
     public bool runningAway = false;
+    public int maxHealth = 3;
+    public Image healthbar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = speed;
+        Healthbarchange();
     }
 
     // Update is called once per frame
     void Update()
     {
         EscapefromMonkey();
+        if (Input.GetKeyDown(KeyCode.Space))
+    {
+        int i = Random.Range(0, kingRunPoints.Length);
+        agent.SetDestination(kingRunPoints[i].position);
+    }
+
     }
     void EscapefromMonkey()
     {
@@ -58,6 +68,7 @@ public class kingScript : MonoBehaviour
     {
         health -= damage;
         GameManager.instance.UpdateKingHealth( damage);
+        Healthbarchange();
         speed += 10f;
         agent.speed = speed;
         print("King has" + health);
@@ -65,6 +76,10 @@ public class kingScript : MonoBehaviour
         {
             kinghasdied();
         }
+    }
+    void Healthbarchange()
+    {
+        healthbar.fillAmount = (float)health / maxHealth;
     }
     void kinghasdied()
     {

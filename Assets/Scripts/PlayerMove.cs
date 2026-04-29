@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using Unity.Mathematics;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public float attackradius = 1.5f;
     public float attackrange = 1f;
     public bool useForce = false;
+    public TextMeshProUGUI attackready;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,6 +31,7 @@ public class PlayerMove : MonoBehaviour
     {
         moveVector = moveAction.ReadValue<Vector2>();
         print(moveVector);
+        cooldown();
 
         if (attackInput.WasReleasedThisFrame())
         {
@@ -79,7 +83,6 @@ public class PlayerMove : MonoBehaviour
     }
     void monkeyAttack()
     {
-        print("monkey attack!");
       if  (Time.time - previousAttack < attackcd)
         return;
         Vector3 bitespawn = transform.position + transform.forward * attackrange;
@@ -101,6 +104,18 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    void cooldown()
+    {
+        float timeleft = attackcd - (Time.time - previousAttack);
+        if(timeleft > 0)
+        {
+            attackready.text = math.ceil(timeleft).ToString();
+        }
+        else
+        {
+            attackready.text = "Ready";
         }
     }
 }
