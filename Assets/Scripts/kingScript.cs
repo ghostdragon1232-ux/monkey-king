@@ -83,7 +83,7 @@ public class kingScript : MonoBehaviour
     }
     void kinghasdied()
     {
-        print("The king has been killed");
+        GameManager.instance.deadking();    
         gameObject.SetActive(false);
     }
 }

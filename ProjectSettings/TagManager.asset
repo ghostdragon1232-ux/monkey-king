@@ -9,6 +9,7 @@ TagManager:
   - CinemachineTarget
   - King
   - DOOR
+  - Book
   layers:
   - Default
   - TransparentFX

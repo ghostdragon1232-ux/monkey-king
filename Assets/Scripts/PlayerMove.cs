@@ -80,6 +80,11 @@ public class PlayerMove : MonoBehaviour
         {
             transform.position = startPos;
         }
+        if (other.CompareTag("Book"))
+        {
+            GameManager.instance.collectbook();
+            Destroy(other.gameObject);
+        }
     }
     void monkeyAttack()
     {
