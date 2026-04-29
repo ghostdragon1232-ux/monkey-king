@@ -13,9 +13,16 @@ public class SCENE_MANAGER : MonoBehaviour
     // Optional: Quit the game
     public void QuitGame()
     {
-        
+                // This closes the application in a build
         Application.Quit();
-        Debug.Log("Game is exiting");
+        
+        // Optional: Close play mode in the Editor for testing
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+
+        // Application.Quit();
+        // Debug.Log("Game is exiting");
          
 
     }
