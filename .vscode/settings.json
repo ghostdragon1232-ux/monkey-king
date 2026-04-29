@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "310-FINAL-PROJECT.slnx"
+    "dotnet.defaultSolution": "monkey-king.slnx"
 }

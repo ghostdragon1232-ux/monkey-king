@@ -7,7 +7,7 @@ public class SCENE_MANAGER : MonoBehaviour
     public void StartGame()
     {
         // Replace "ROCKETS UI" with the exact name of your game scene
-        SceneManager.LoadScene("FULL MAP"); 
+        SceneManager.LoadScene("map"); 
     }
 
     // Optional: Quit the game

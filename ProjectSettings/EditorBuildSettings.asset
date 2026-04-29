@@ -5,9 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/DEREK's STUFF/SCENES/START.unity
+    guid: 88180205fb68247419a64c3879b57cd2
+  - enabled: 1
+    path: Assets/DEREK's STUFF/SCENES/map.unity
+    guid: df581ad598fc50844a2fcf6ded74e679
+  - enabled: 1
+    path: Assets/DEREK's STUFF/SCENES/FALSE ENDING.unity
+    guid: 2bd663a43ef7d904f80e7a61665489d0
+  - enabled: 1
+    path: Assets/DEREK's STUFF/SCENES/MONKEY KING.unity
+    guid: d81d98acf0f753042babd8120ca81a89
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

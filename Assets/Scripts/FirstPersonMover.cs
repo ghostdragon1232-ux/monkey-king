@@ -21,7 +21,6 @@ public class FirstPersonMover : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody>();
         startPos = transform.position;
-        rb.linearDamping = 8f;
     }
 
     // Update is called once per frame

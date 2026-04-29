@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
 public class KNIGHTAI : MonoBehaviour
@@ -16,11 +17,14 @@ public class KNIGHTAI : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstacleMask;
 
+    [Header("Ending Settings")]
+    
+
     private NavMeshAgent agent;
     private Animator animator;
     private int currentWaypointIndex;
     private Transform player;
-    private bool isChasing;
+    public bool isChasing;
 
     private static readonly int IsChasingHash = Animator.StringToHash("isChasing");
 
@@ -51,7 +55,7 @@ public class KNIGHTAI : MonoBehaviour
             // If lost sight, go back to patrolling
             isChasing = false;
             agent.speed = patrolSpeed;
-            SetDestinationToWaypoint();
+            // SetDestinationToWaypoint();
         }
 
         if (animator != null)
@@ -63,6 +67,22 @@ public class KNIGHTAI : MonoBehaviour
         {
             IterateWaypointIndex();
             SetDestinationToWaypoint();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("FALSE ENDING");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+           //SceneManager.LoadScene("FALSE ENDING");
         }
     }
 
