@@ -7,7 +7,7 @@ public class kingScript : MonoBehaviour
     public int health =3;
     public float speed = 20f;
     public float distanceforEscape =15f;
-    public Transform player;
+    private Transform player;
     private NavMeshAgent agent;
     public Transform [] kingRunPoints;
     public bool runningAway = false;
@@ -36,7 +36,6 @@ public class kingScript : MonoBehaviour
     void EscapefromMonkey()
     {
         if (player == null) 
-
         return;
                 print(Vector3.Distance(transform.position, player.transform.position));
 
@@ -53,17 +52,14 @@ public class kingScript : MonoBehaviour
             runningAway=false;
         }
 
-        /*
+        
         Vector3 direction =(transform.position - player.position).normalized;
         Vector3 target = transform.position + direction * distanceforEscape;
         NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(target, out hit, 0.5f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(target, out hit, 2f, NavMesh.AllAreas))
         {
-            print("run");
             agent.SetDestination(hit.position);
         }
-        */
     }
     public void kingBit(int damage)
     {

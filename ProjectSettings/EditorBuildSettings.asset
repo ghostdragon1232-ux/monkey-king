@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/map.unity
+    path: Assets/DEREK's STUFF/SCENES/map.unity
     guid: df581ad598fc50844a2fcf6ded74e679
   - enabled: 1
     path: Assets/Scenes/MONKEY KING.unity

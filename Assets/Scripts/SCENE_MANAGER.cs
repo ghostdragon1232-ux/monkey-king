@@ -7,15 +7,22 @@ public class SCENE_MANAGER : MonoBehaviour
     public void StartGame()
     {
         // Replace "ROCKETS UI" with the exact name of your game scene
-        SceneManager.LoadScene("FULL MAP"); 
+        SceneManager.LoadScene("map"); 
     }
 
     // Optional: Quit the game
     public void QuitGame()
     {
-        
+                // This closes the application in a build
         Application.Quit();
-        Debug.Log("Game is exiting");
+        
+        // Optional: Close play mode in the Editor for testing
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
+
+        // Application.Quit();
+        // Debug.Log("Game is exiting");
          
 
     }
