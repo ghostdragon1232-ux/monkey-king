@@ -6,7 +6,7 @@ using Unity.Mathematics;
 
 public class PlayerMove : MonoBehaviour
 {
-    private InputAction moveAction;
+    private InputAction moveAction,attackInput;
     private Rigidbody rb;
     private Vector2 moveVector;
     private Vector3 startPos;
