@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
@@ -23,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         moveAction = InputSystem.actions.FindAction("Move");
+        attackInput = InputSystem.actions.FindAction("Attack");
         rb = GetComponent<Rigidbody>();
         startPos = transform.position;
         Soundmanager.playSound(soundtype.monkeywalk);
@@ -48,10 +48,26 @@ public class PlayerMove : MonoBehaviour
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
 
-        // rb.AddForce((moveVector.y * new Vector3(cameraForward.x, 0, cameraForward.z)) * speed);
-        rb.AddForce((moveVector.y * cameraForward) * speed);
-        rb.AddForce((moveVector.x * cameraRight) * speed);
-        //rb.linearVelocity += new Vector3(moveVector.x * speed, 0, moveVector.y * speed);
+        if (useForce)
+        {
+            rb.AddForce((moveVector.y * cameraForward) * speed);
+            rb.AddForce((moveVector.x * cameraRight) * speed);
+        }
+        else
+        {
+            if (moveVector.x == 0 && moveVector.y == 0)
+            {
+                rb.linearVelocity = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                Vector3 moveR = moveVector.x * cameraRight;
+                Vector3 moveF = moveVector.y * cameraForward;
+                rb.linearVelocity = (moveR + moveF) * speed;
+            }
+        }
+                transform.rotation = Camera.main.transform.rotation;
+
     }
 
     void OnTriggerEnter(Collider other)
